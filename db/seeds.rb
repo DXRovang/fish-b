@@ -7,15 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'rest-client'
 
-fish = RestClient.get 'https://www.fishwatch.gov/api/species/red-snapper'
+fish = RestClient.get 'https://www.fishwatch.gov/api/species'
 # binding.pry 
 fish_array = JSON.parse(fish)
 # ["Species Illustration Photo"]
 
 binding.pry 
 
-fish_array[0]["Image Gallery"].each do |fish|
+fish_array.each do |fish|
   Fish.create(
-    species_name: fish["src"],
+    species_name: fish["Species Name"],
   )
 end
